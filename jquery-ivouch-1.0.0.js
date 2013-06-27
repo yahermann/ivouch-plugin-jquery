@@ -16,12 +16,12 @@
     var settings = $.extend({
       // officially documented
 	  key: '',
-	  onload : function(t) { },
-	  onerror : function(err) { },
+	  ondone : function(t) { },
+	  onfail : function(err) { },
 	  reviews_start : undefined,
 	  reviews_num : undefined,
-	  reviews_sortby : undefined,
 	  // not documented
+	  reviews_sortby : undefined, // not supported by API
 	  default_author_photo_url : '//open.ivouch.com/v1/static/img/author_nophoto_sm.gif',
 	  endpoint : '//open.ivouch.com/v1/api/'
       }, options );
@@ -85,18 +85,18 @@
 		
       jqxhr[topic_id].done(function(t) {
 	    if (t.error) {
-          if ((typeof(settings.onerror) === 'function') && (settings.onerror(t.error) === false)) {
+          if ((typeof(settings.onfail) === 'function') && (settings.onfail(t.error) === false)) {
 	        return; }
           alert(t.error);
 		  }
-        if ((typeof(settings.onload) === 'function') && (settings.onload(t) === false)) {
+        if ((typeof(settings.ondone) === 'function') && (settings.ondone(t) === false)) {
  	      return; }
         display(jq, t);
 		});
 
       jqxhr[topic_id].fail(function(jqXHR) {
 	    var error = 'http '+jqXHR.status+' error';
-        if ((typeof(settings.onerror) === 'function') && (settings.onerror(error) === false)) {
+        if ((typeof(settings.onfail) === 'function') && (settings.onfail(error) === false)) {
 	      return; }
 		alert(error);
         });
