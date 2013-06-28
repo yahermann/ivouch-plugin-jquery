@@ -1,7 +1,7 @@
 /*!
  * jQuery plug-in for iVouch
- * Version 1.0.0 (11-MAY-2012)
- * @requires jQuery v1.2.3 or later
+ * Version 1.0.0
+ * @requires jQuery v1.5 or later
  *
  * Documentation and examples at: http://open.ivouch.com
  * Copyright (c) Diamond Review, Inc. aka iVouch
@@ -20,6 +20,7 @@
 	  onfail : function(err) { },
 	  reviews_start : undefined,
 	  reviews_num : undefined,
+	  reviews_selector : '.reviews',
 	  // not documented
 	  reviews_sortby : undefined, // not supported by API
 	  default_author_photo_url : '//open.ivouch.com/v1/static/img/author_nophoto_sm.gif',
@@ -32,7 +33,7 @@
 	  	  
     var display = function(jq, t) {
       // reviews
-      jq.find('.reviews').each(function() {
+      jq.find(settings.reviews_selector).each(function() {
 	    var one = $(this).html();
 		var all = '';
 		if (t.reviews) {
