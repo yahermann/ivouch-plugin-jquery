@@ -23,8 +23,8 @@
 	  reviews_selector : '.reviews',
 	  // not documented
 	  reviews_sortby : undefined, // not supported by API
-	  default_author_photo_url : '//open.ivouch.com/v1/static/img/author_nophoto_sm.gif',
-	  endpoint : '//open.ivouch.com/v1/api/'
+	  default_author_photo_url : '//open.ivouch.com/v2/static/img/author_nophoto_sm.gif',
+	  endpoint : '//open.ivouch.com/v2/api/'
       }, options );
 
     var txt2html = function(t) {
