@@ -38,7 +38,7 @@
 		var all = '';
 		if (t.reviews) {
 	  	  for (var i=0; i<t.reviews.length; i++) {
-		    all += one.replace(/\<!\-\-([^%]*)%%([a-z_]+)%%([^%]*)\-\-\>/gi, function(match, s1, v, s2) {
+		    all += one.replace(/\<!\-\-([^%]*)%%([a-z0-9_]+)%%([^%]*)\-\-\>/gi, function(match, s1, v, s2) {
 			  var value = typeof(t.reviews[i][v]) === 'string' ? t.reviews[i][v] : typeof(t.reviews[i][v]) === 'number' ? t.reviews[i][v].toString() : '';
               switch (v) {
 			    case 'written_dt':
@@ -55,7 +55,7 @@
 		$(this).html(all);
 		});
       // everything else
-      jq.html(jq.html().replace(/\<!\-\-([^%]*)%%([a-z_]+)%%([^%]*)\-\-\>/gi, function(match, s1, v, s2) {
+      jq.html(jq.html().replace(/\<!\-\-([^%]*)%%([a-z0-9_]+)%%([^%]*)\-\-\>/gi, function(match, s1, v, s2) {
         var value = typeof(t[v]) === 'string' ? t[v] : typeof(t[v]) === 'number' ? t[v].toString() : '';
         value = txt2html(value);
 	    return s1 + (value.length > 0 ? value : (settings['default_'+v] || '')) + s2;
