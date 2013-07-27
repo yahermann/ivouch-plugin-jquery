@@ -44,6 +44,12 @@
 			    case 'written_dt':
 				  value = new Date(value).toLocaleDateString() + '&nbsp;&nbsp;&nbsp;' + new Date(value).toLocaleTimeString(); 
 				  break;
+				case 'author_hasvouched':
+				  value = value ? 'vouched' : '';
+				  break;
+				case 'author_photo_sm_url':
+				  value = value || settings.default_author_photo_url;
+				  break;
 				default:
 				  value = txt2html(value);
 				  break;
@@ -75,8 +81,8 @@
           type: 'GET',
 		  dataType: 'jsonp',
           url: settings.endpoint+
-		    'topic/id='+topic_id+
-			'&key='+settings.key+
+		    'topic/'+topic_id+
+			'?key='+settings.key+
 			(typeof(settings.reviews_start)!=='undefined' ? '&reviews_start='+settings.reviews_start : '')+
 			(typeof(settings.reviews_num)!=='undefined' ? '&reviews_num='+settings.reviews_num : '')+
 			(typeof(settings.reviews_sortby)!=='undefined' ? '&reviews_sortby='+settings.reviews_sortby : '')+
@@ -96,10 +102,10 @@
 		});
 
       jqxhr[topic_id].fail(function(jqXHR) {
-	    var error = 'http '+jqXHR.status+' error';
+        var error = (jqXHR ? jqXHR.responseJSON ? jqXHR.responseJSON.error || '' : '' : '') || 'http '+jqXHR.status+' error';
         if ((typeof(settings.onfail) === 'function') && (settings.onfail(error) === false)) {
 	      return; }
-		alert(error);
+		alert('Error: '+error);
         });
 
   	  });
